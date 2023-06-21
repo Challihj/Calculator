@@ -47,23 +47,24 @@ public void start(Stage primaryStage) {
     VBox right = new VBox(); // right side vbox for history tracker
     
     // Setting width constraints for each button
-    b1.setPrefWidth(70);
-    b2.setPrefWidth(70);
-    b3.setPrefWidth(70);
-    b4.setPrefWidth(70);
-    b5.setPrefWidth(70);
-    b6.setPrefWidth(70);
-    b7.setPrefWidth(70);
-    b8.setPrefWidth(70);
-    b9.setPrefWidth(70);
-    b0.setPrefWidth(70);
-    equal.setPrefWidth(70);
-    add.setPrefWidth(70);
-    clear.setPrefWidth(70);
-    sub.setPrefWidth(70);
-    div.setPrefWidth(70);
-    mult.setPrefWidth(70);
+    b1.setPrefWidth(70); b1.setPrefHeight(100);
+    b2.setPrefWidth(70); b2.setPrefHeight(100);
+    b3.setPrefWidth(70); b3.setPrefHeight(100);
+    b4.setPrefWidth(70); b4.setPrefHeight(100);
+    b5.setPrefWidth(70); b5.setPrefHeight(100);
+    b6.setPrefWidth(70); b6.setPrefHeight(100);
+    b7.setPrefWidth(70); b7.setPrefHeight(100);
+    b8.setPrefWidth(70); b8.setPrefHeight(100);
+    b9.setPrefWidth(70); b9.setPrefHeight(100);
+    b0.setPrefWidth(70); b0.setPrefHeight(100);
+    equal.setPrefWidth(70); equal.setPrefHeight(100);
+    add.setPrefWidth(70); add.setPrefHeight(100);
+    clear.setPrefWidth(70); clear.setPrefHeight(100);
+    sub.setPrefWidth(70); sub.setPrefHeight(100);
+    div.setPrefWidth(70); div.setPrefHeight(100);
+    mult.setPrefWidth(70); mult.setPrefHeight(100);
     input.setPrefWidth(280);
+    history.setPrefWidth(280);
 
     history.setEditable(false);
     input.setEditable(false);
@@ -80,7 +81,7 @@ public void start(Stage primaryStage) {
     hbox2.getChildren().addAll(b4, b5, b6, sub);
     // third row
     HBox hbox3 = new HBox(0);
-    hbox3.getChildren().addAll(b1, b2, b3, div);
+    hbox3.getChildren().addAll(b1, b2, b3, div);    
     // fourth row
     HBox hbox4 = new HBox(0);
     hbox4.getChildren().addAll(b0, equal, mult, clear);
@@ -95,16 +96,17 @@ public void start(Stage primaryStage) {
     // Save and load buttons
     HBox bottom = new HBox();
     bottom.getChildren().addAll(clearH);
+    clearH.setPrefWidth(280);
 
     // Right side vbox adds the hbox's created for the right 
     // Side of application
     right.getChildren().addAll(box, bottom);
-
+    
     // Root hbox gets the left and right vbox's
     root.getChildren().addAll(left, right);
-    Scene scene = new Scene(root, 800, 200);
+    Scene scene = new Scene(root, 400, 200);
 
-    primaryStage.setTitle("Calculator v 0.1");
+    primaryStage.setTitle("Calculator");
     primaryStage.setResizable(false);
     primaryStage.setScene(scene);
     primaryStage.show();
