@@ -36,17 +36,15 @@ public class Calculator extends Application {
     Button div = new Button("/");
     Button mult = new Button("*");
     Button clear = new Button("Cl");
-    Button save = new Button("Save");
-    Button load = new Button("Load");
+    Button clearH = new Button("Clear History");
     TextArea history = new TextArea();
     TextField input = new TextField();
 
     @Override
 public void start(Stage primaryStage) {
-
-    HBox root = new HBox();
-    VBox left = new VBox();
-    VBox right = new VBox();
+    HBox root = new HBox(); // Main application
+    VBox left = new VBox(); // left side vbox for calculator
+    VBox right = new VBox(); // right side vbox for history tracker
     
     // Setting width constraints for each button
     b1.setPrefWidth(70);
@@ -96,7 +94,7 @@ public void start(Stage primaryStage) {
     box.getChildren().add(history);
     // Save and load buttons
     HBox bottom = new HBox();
-    bottom.getChildren().addAll(save, load);
+    bottom.getChildren().addAll(clearH);
 
     // Right side vbox adds the hbox's created for the right 
     // Side of application
@@ -111,74 +109,88 @@ public void start(Stage primaryStage) {
     primaryStage.setScene(scene);
     primaryStage.show();
 
-    //lambda expresison for all number buttons and operators
+    // Lambda expresison for all number buttons and operators
     b0.setOnAction(event -> {
         input.appendText("0");
+        history.appendText("0");
     });
     b1.setOnAction(event -> {
         input.appendText("1");
+        history.appendText("1");
     });
     b2.setOnAction(event -> {
         input.appendText("2");
+        history.appendText("2");
     });
     b3.setOnAction(event -> {
         input.appendText("3");
+        history.appendText("3");
     });
     b4.setOnAction(event -> {
         input.appendText("4");
+        history.appendText("4");  
     });
     b5.setOnAction(event -> {
         input.appendText("5");
+         history.appendText("5");
     });
     b6.setOnAction(event -> {
         input.appendText("6");
+        history.appendText("6");
     });
     b7.setOnAction(event -> {
-        input.appendText("7");
+        input.appendText("7");        
+        history.appendText("7");
     });
     b8.setOnAction(event -> {
-        input.appendText("8");
+        input.appendText("8");    
+        history.appendText("8");
     });
     b9.setOnAction(event -> {
-        input.appendText("9");
+        input.appendText("9");        
+        history.appendText("9");
     });
     add.setOnAction(event -> {
         input.appendText(" + ");
+        history.appendText(" + ");
     });
     sub.setOnAction(event -> {
-        input.appendText(" - ");
+        input.appendText(" - ");        
+        history.appendText(" - ");
     });
     mult.setOnAction(event -> {
         input.appendText(" * ");
+        history.appendText(" * ");
     });
     div.setOnAction(event -> {
         input.appendText(" / ");
+        history.appendText(" / ");
     });
     clear.setOnAction(event -> {
         input.setText("");
+        history.appendText(" \n");
+    });
+    clearH.setOnAction(event -> {
+        history.setText("");
     });
 
     // Calculates the total by properly handling the string in the text field with engine eval
     equal.setOnAction(event -> {
         ScriptEngineManager mgr = new ScriptEngineManager();
         ScriptEngine engine = mgr.getEngineByName("JavaScript");
-
         try {
-            System.out.println(engine.eval(input.getText()));
             input.setText(engine.eval(input.getText()).toString());
+            history.appendText((" = " + engine.eval(input.getText()).toString()));
         } catch (ScriptException ex) {
             ex.printStackTrace();
             input.setText("Error");
         }
-
     });
 }
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         launch(args);
     }
-
 }
