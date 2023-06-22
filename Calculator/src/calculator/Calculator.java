@@ -47,24 +47,26 @@ public void start(Stage primaryStage) {
     VBox right = new VBox(); // right side vbox for history tracker
     
     // Setting width constraints for each button
-    b1.setPrefWidth(70);
-    b2.setPrefWidth(70);
-    b3.setPrefWidth(70);
-    b4.setPrefWidth(70);
-    b5.setPrefWidth(70);
-    b6.setPrefWidth(70);
-    b7.setPrefWidth(70);
-    b8.setPrefWidth(70);
-    b9.setPrefWidth(70);
-    b0.setPrefWidth(70);
-    equal.setPrefWidth(70);
-    add.setPrefWidth(70);
-    clear.setPrefWidth(70);
-    sub.setPrefWidth(70);
-    div.setPrefWidth(70);
-    mult.setPrefWidth(70);
-    input.setPrefWidth(280);
-
+    //b1.setPrefWidth(70); b1.setPrefHeight(100);
+    b1.setPrefSize(70, 100);
+    b2.setPrefSize(70, 100);
+    b3.setPrefSize(70, 100);
+    b4.setPrefSize(70, 100);
+    b5.setPrefSize(70, 100);
+    b6.setPrefSize(70, 100);
+    b7.setPrefSize(70, 100);
+    b8.setPrefSize(70, 100);
+    b9.setPrefSize(70, 100);
+    b0.setPrefSize(70, 100);
+    equal.setPrefSize(70, 100);
+    add.setPrefSize(70, 100);
+    clear.setPrefSize(70, 100);
+    sub.setPrefSize(70, 100);
+    div.setPrefSize(70, 100);
+    mult.setPrefSize(70, 100);
+    clearH.setPrefSize(280, 70);
+    input.setPrefWidth(280); 
+    history.setPrefWidth(280);
     history.setEditable(false);
     input.setEditable(false);
 
@@ -102,7 +104,7 @@ public void start(Stage primaryStage) {
 
     // Root hbox gets the left and right vbox's
     root.getChildren().addAll(left, right);
-    Scene scene = new Scene(root, 800, 200);
+    Scene scene = new Scene(root, 560, 200);
 
     primaryStage.setTitle("Calculator v 0.1");
     primaryStage.setResizable(false);
