@@ -1,5 +1,6 @@
 package calculator;
 
+import java.awt.Insets;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
@@ -56,7 +57,6 @@ public void start(Stage primaryStage) {
     VBox right = new VBox(); // right side vbox for history tracker
     
     // Setting width constraints for each button
-    //b1.setPrefWidth(70); b1.setPrefHeight(100);
     b1.setPrefSize(70, 100);
     b2.setPrefSize(70, 100);
     b3.setPrefSize(70, 100);
@@ -73,7 +73,7 @@ public void start(Stage primaryStage) {
     sub.setPrefSize(70, 100);
     div.setPrefSize(70, 100);
     mult.setPrefSize(70, 100);
-    clearH.setPrefSize(70, 100);
+    clearH.setPrefSize(125, 100);
     save.setPrefSize(70,100);
     load.setPrefSize(70,100);
     input.setPrefWidth(280); 
@@ -107,6 +107,7 @@ public void start(Stage primaryStage) {
     box.getChildren().add(history);
     // Save and load buttons
     HBox bottom = new HBox();
+
     bottom.getChildren().addAll(clearH, save, load);
 
     // Right side vbox adds the hbox's created for the right 
@@ -115,12 +116,12 @@ public void start(Stage primaryStage) {
 
     // Root hbox gets the left and right vbox's
     root.getChildren().addAll(left, right);
-    Scene scene = new Scene(root, 540, 200);
+    Scene scene = new Scene(root, 535, 200);
 
     Image image = new Image("/Images/calc.png");
     primaryStage.getIcons().add(image);
     primaryStage.setTitle("Calculator");
-    primaryStage.setResizable(false);
+   // primaryStage.setResizable(false);
     primaryStage.setScene(scene);
     primaryStage.show();
 
