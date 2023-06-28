@@ -1,5 +1,11 @@
 package calculator;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -17,6 +23,7 @@ import javafx.stage.Stage;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javafx.scene.image.Image;
 
 public class Calculator extends Application {
     // Creating the buttons
@@ -37,6 +44,8 @@ public class Calculator extends Application {
     Button mult = new Button("*");
     Button clear = new Button("Cl");
     Button clearH = new Button("Clear History");
+    Button save = new Button("Save");
+    Button load = new Button("Load");
     TextArea history = new TextArea();
     TextField input = new TextField();
 
@@ -64,7 +73,9 @@ public void start(Stage primaryStage) {
     sub.setPrefSize(70, 100);
     div.setPrefSize(70, 100);
     mult.setPrefSize(70, 100);
-    clearH.setPrefSize(280, 70);
+    clearH.setPrefSize(70, 100);
+    save.setPrefSize(70,100);
+    load.setPrefSize(70,100);
     input.setPrefWidth(280); 
     history.setPrefWidth(280);
     history.setEditable(false);
@@ -96,7 +107,7 @@ public void start(Stage primaryStage) {
     box.getChildren().add(history);
     // Save and load buttons
     HBox bottom = new HBox();
-    bottom.getChildren().addAll(clearH);
+    bottom.getChildren().addAll(clearH, save, load);
 
     // Right side vbox adds the hbox's created for the right 
     // Side of application
@@ -104,9 +115,11 @@ public void start(Stage primaryStage) {
 
     // Root hbox gets the left and right vbox's
     root.getChildren().addAll(left, right);
-    Scene scene = new Scene(root, 560, 200);
+    Scene scene = new Scene(root, 540, 200);
 
-    primaryStage.setTitle("Calculator v 0.1");
+    Image image = new Image("/Images/calc.png");
+    primaryStage.getIcons().add(image);
+    primaryStage.setTitle("Calculator");
     primaryStage.setResizable(false);
     primaryStage.setScene(scene);
     primaryStage.show();
@@ -188,6 +201,34 @@ public void start(Stage primaryStage) {
             input.setText("Error");
         }
     });
+    
+    // Action for clicking "Save" button, saves ticker history into a binary file
+        save.setOnAction(e -> {
+            try {
+                String ticker = history.getText();
+                DataOutputStream tickerHist = new DataOutputStream(new FileOutputStream("Ticker.dat"));
+                tickerHist.writeUTF(ticker);
+                tickerHist.close();
+            } catch (IOException ex) {
+                System.out.println(ex.toString());
+            }
+            System.out.println(history.getText());
+        });
+
+    // Action for clicking "Load" button, loads saved ticker history from binary file
+        load.setOnAction(e -> {
+            try {
+                DataInputStream loadedresults = new DataInputStream(new FileInputStream("Ticker.dat"));
+                while (true) {
+                    history.setText(loadedresults.readUTF());
+                }
+            } catch (EOFException ex2) {
+                System.out.println(ex2.toString());
+
+            } catch (Exception ex) {
+                System.out.println(ex.toString());
+            }
+        });
 }
     /**
      * @param args the command line arguments
